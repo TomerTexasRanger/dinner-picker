@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const db = mongoose
   .connect(
-    `mongodb+srv://tomer:${process.env.MONGO_ATLAS_PW}@cluster0.v14ve.mongodb.net/postApp`,
+    `mongodb+srv://tomer:otQC2mjJX5vtvkNo@cluster0.v14ve.mongodb.net/postApp`,
     {
       useCreateIndex: true,
       useNewUrlParser: true,
