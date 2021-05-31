@@ -50,7 +50,3 @@ const debug = require("debug")("node-angular");
 // server.on("error", onError);
 // server.on("listening", onListening);
 // server.listen(port);
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Listening on port${port}`);
-});
