@@ -3,7 +3,7 @@ import { Post } from "./post.model";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.prod";
 
 const BACKEND_URL = environment.apiUrl;
 
