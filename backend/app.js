@@ -9,7 +9,7 @@ const path = require("path");
 const http = require("http");
 
 app.use("/images", express.static(path.join("backend/images")));
-// app.use("/", express.static(path.join(__dirname, "angular")));
+app.use("/", express.static(path.join(__dirname, "angular")));
 app.use(cors());
 
 app.use(express.json());
