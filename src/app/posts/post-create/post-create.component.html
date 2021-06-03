@@ -1,9 +1,13 @@
+<div>
+  <h2>Fill out the fields to post your own recipe...</h2>
+</div>
+
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
 
     <mat-form-field>
-      <input formControlName="title" placeholder="Post Title" matInput type=" text" name="title">
+      <input formControlName="title" placeholder="Name your dish..." matInput type=" text" name="title">
       <mat-error *ngIf="form.get('title').invalid">Please enter a post title</mat-error>
     </mat-form-field>
     <mat-form-field-control>
@@ -12,18 +16,24 @@
     </mat-form-field-control>
     <div class="image-preview" *ngIf="imagePreview !==''&& imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.title">
+
     </div>
 
     <mat-form-field>
-      <textarea formControlName="content" placeholder="Post Content" matInput rows="5" name="content" z></textarea>
-      <mat-error *ngIf="form.get('content').invalid">Please enter a post content</mat-error>
+      <textarea formControlName="ingredients" placeholder="Ingredients..." matInput rows="5" name="ingredients"
+        z></textarea>
+      <mat-error *ngIf="form.get('ingredients').invalid">Please enter a post content</mat-error>
+
+    </mat-form-field>
+    <mat-form-field>
+      <textarea formControlName="recipe" placeholder="Recipe..." matInput rows="5" name="recipe" z></textarea>
+      <mat-error *ngIf="form.get('recipe').invalid">Please enter a post content</mat-error>
 
     </mat-form-field>
 
 
 
     <button type="submit" mat-raised-button color="primary">Save Post</button>
-
 
   </form>
 </mat-card>

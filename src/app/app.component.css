@@ -1,5 +1,42 @@
-main {
-  margin-top: 1rem;
-  width: 80%;
-  margin: 1rem auto;
+body {
+  font-family: "Cabin", sans-serif;
+}
+@media (min-width: 300px) {
+  main {
+    width: 90%;
+    margin: 0 auto;
+  }
+  app-footer {
+    background-color: #264653;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    margin-bottom: -4rem !important;
+  }
+}
+@media (min-width: 470px) {
+  main {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 570px) {
+  main {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+app-footer {
+  background-color: #264653;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100%;
+  margin-bottom: 0 !important;
 }

@@ -12,7 +12,8 @@ router.post("/", auth, multer, async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   let post = new PostModel({
     title: req.body.title,
-    content: req.body.content,
+    ingredients: req.body.ingredients,
+    recipe: req.body.recipe,
     imagePath: url + "/images/" + req.file.filename,
     creator: req.user._id,
   });
@@ -58,6 +59,22 @@ router.put("/:id", auth, multer, async (req, res) => {
   } catch (error) {
     console.error(error.error);
     res.status(500).send("Couldn't update post");
+  }
+});
+
+// route: GET /api/posts/random
+// useage: Fetch a random post
+// auth: public
+router.get("/random", async (req, res) => {
+  console.log("works");
+  try {
+    let posts = await PostModel.find();
+    let postsNum = await PostModel.find().countDocuments();
+    let randomNum = Math.floor(Math.random() * postsNum);
+    console.log(randomNum);
+    res.status(200).json(posts[randomNum]);
+  } catch (error) {
+    console.log(error.error);
   }
 });
 

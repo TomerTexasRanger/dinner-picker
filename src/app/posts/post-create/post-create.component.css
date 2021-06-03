@@ -3,6 +3,14 @@ textarea {
   width: 100%;
 }
 
+mat-card {
+  background-color: #eee;
+}
+h2 {
+  margin: 0;
+  padding: 3rem;
+}
+
 mat-spinner {
   margin: auto;
 }
@@ -18,4 +26,9 @@ input[type="file"] {
 
 .image-preview img {
   height: 100%;
+}
+
+button[type="submit"] {
+  background-color: #2a9d8f;
+  color: white;
 }

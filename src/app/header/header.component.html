@@ -1,4 +1,4 @@
-<mat-toolbar color="primary"> <span> <a routerLink=""> My messages</a></span>
+<mat-toolbar color=""> <span> <a routerLink=""> DinnerPicker</a></span>
   <span class="spacer"></span>
   <ul>
     <li *ngIf="userIsAuthenticated"><a mat-button routerLink="/create" routerLinkActive="mat-accent">Add new post</a>
@@ -8,6 +8,11 @@
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-button (click)="onLogout()">Logout</button>
+    </li>
+    <li class="userName" *ngIf="userIsAuthenticated">
+      <p>
+        {{user&& user.email}}
+      </p>
     </li>
   </ul>
 </mat-toolbar>

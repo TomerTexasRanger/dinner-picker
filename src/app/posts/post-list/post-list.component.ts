@@ -26,6 +26,17 @@ export class PostListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   userId: string;
 
+  getRandomPost() {
+    this.postsService.getRandomPost().subscribe((post) => {
+      console.log(post);
+      this.posts = [];
+      this.posts.push(post);
+    });
+  }
+  showAllPosts() {
+    this.postsService.getPosts(this.postsPerPage, this.currentPage);
+  }
+
   onDeletePost(id: string) {
     this.isLoading = true;
     this.postsService.deletePost(id).subscribe(

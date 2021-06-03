@@ -5,7 +5,11 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  content: {
+  ingredients: {
+    type: String,
+    required: true,
+  },
+  recipe: {
     type: String,
     required: true,
   },

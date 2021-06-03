@@ -1,7 +1,26 @@
 mat-form-field {
   width: 100%;
 }
+.container {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 mat-spinner {
   margin: auto;
+}
+mat-card {
+  background-color: #eee;
+}
+
+button[type="submit"] {
+  background-color: #2a9d8f;
+  color: white;
+}
+h2 {
+  margin: 0;
+  padding: 3rem;
 }

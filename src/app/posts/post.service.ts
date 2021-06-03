@@ -3,7 +3,7 @@ import { Post } from "./post.model";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { environment } from "../../environments/environment.prod";
+import { environment } from "../../environments/environment";
 
 const BACKEND_URL = environment.apiUrl;
 
@@ -31,25 +31,44 @@ export class PostsService {
   getPostUpdatedListener() {
     return this.postsUpdated.asObservable();
   }
+  getRandomPost() {
+    return this.http.get<{
+      _id: string;
+      title: string;
+      ingredients: string;
+      recipe: string;
+      imagePath: string;
+      creator: string;
+    }>(`${BACKEND_URL}/posts/random`);
+  }
+
   getPost(id: string) {
     return this.http.get<{
       _id: string;
       title: string;
-      content: string;
+      ingredients: string;
+      recipe: string;
       imagePath: string;
       creator: string;
     }>(`${BACKEND_URL}/posts/${id}`);
   }
-  addPost(title: string, content: string, image: File) {
+  async addPost(
+    title: string,
+    ingredients: string,
+    recipe: string,
+    image: File
+  ) {
+    console.log("works");
     const postData = new FormData();
-
     postData.append("title", title);
-    postData.append("content", content);
+    postData.append("ingredients", ingredients);
+    postData.append("recipe", recipe);
     postData.append("image", image, title);
 
     this.http
       .post<{ msg: string; post: Post }>(`${BACKEND_URL}/posts`, postData)
       .subscribe((responseData) => {
+        console.log(responseData);
         this.router.navigate(["/"]);
       });
   }
@@ -57,7 +76,8 @@ export class PostsService {
   updatePost(
     _id: string,
     title: string,
-    content: string,
+    ingredients: string,
+    recipe: string,
     image: File | string
   ) {
     console.log(image);
@@ -66,14 +86,15 @@ export class PostsService {
       postData = new FormData();
       postData.append("_id", _id);
       postData.append("title", title);
-      postData.append("content", content);
+      postData.append("ingredients", ingredients);
+      postData.append("recipe", recipe);
       postData.append("image", image, title);
-      console.log(postData);
     } else {
       postData = {
         _id,
         title,
-        content,
+        ingredients,
+        recipe,
         imagePath: image,
         creator: null,
       };

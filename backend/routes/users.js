@@ -3,6 +3,7 @@ const router = express.Router();
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const auth = require("../middleware/check-auth");
 
 // route: POST /api/users/signup
 // useage: Register a new user
@@ -48,6 +49,20 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(401).send("Invalid authentication credentials");
+  }
+});
+
+// route: GET /api/users/me
+// useage: get current user
+// auth: private
+router.get("/me", auth, async (req, res) => {
+  try {
+    let user = await UserModel.findOne({ _id: req.user._id });
+    if (!user) return res.status(400).send("User not found");
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
   }
 });
 

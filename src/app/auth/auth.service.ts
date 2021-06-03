@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { AuthDataModel } from "./auth-data-model";
-import { environment } from "../../environments/environment.prod";
+import { environment } from "../../environments/environment";
 
 const BACKEND_URL = environment.apiUrl;
 
@@ -16,6 +16,7 @@ export class AuthService {
   private isAuthenticated = false;
   private tokenTimer: ReturnType<typeof setTimeout>;
   private userId: string;
+  private currentUser = new Subject<any>();
   constructor(private http: HttpClient, private router: Router) {}
 
   createUser(email: string, password: string) {
@@ -48,6 +49,14 @@ export class AuthService {
   getUserId() {
     return this.userId;
   }
+  getCurrentUser() {
+    return this.currentUser.asObservable();
+  }
+  getMyUser() {
+    this.http.get<any>(`${BACKEND_URL}/users/me`).subscribe((user) => {
+      this.currentUser.next(user);
+    });
+  }
 
   login(email: string, password: string) {
     const user: AuthDataModel = {
@@ -76,6 +85,7 @@ export class AuthService {
               );
               console.log(expirationDate);
               this.saveAuthData(token, expirationDate, this.userId);
+              this.getMyUser();
               this.router.navigate(["/"]);
             }
           },

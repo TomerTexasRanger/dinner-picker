@@ -1,7 +1,8 @@
 export interface Post {
   _id: string;
   title: string;
-  content: string;
+  ingredients: string;
+  recipe: string;
   imagePath: string | File;
   creator: string;
 }

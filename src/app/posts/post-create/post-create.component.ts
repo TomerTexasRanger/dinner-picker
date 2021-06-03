@@ -30,6 +30,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+    console.log(file);
     this.form.patchValue({ image: file });
     this.form.get("image").updateValueAndValidity();
     const reader = new FileReader();
@@ -47,7 +48,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     if (this.mode === "create") {
       this.postsService.addPost(
         this.form.value.title,
-        this.form.value.content,
+        this.form.value.ingredients,
+        this.form.value.recipe,
         this.form.value.image
       );
       this.form.reset();
@@ -55,7 +57,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       this.postsService.updatePost(
         this.postId,
         this.form.value.title,
-        this.form.value.content,
+        this.form.value.ingredients,
+        this.form.value.recipe,
         this.form.value.image
       );
       this.form.reset();
@@ -72,7 +75,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)],
       }),
-      content: new FormControl(null, { validators: [Validators.required] }),
+      ingredients: new FormControl(null, { validators: [Validators.required] }),
+      recipe: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType],
@@ -88,13 +92,15 @@ export class PostCreateComponent implements OnInit, OnDestroy {
           this.post = {
             _id: postData._id,
             title: postData.title,
-            content: postData.content,
+            ingredients: postData.ingredients,
+            recipe: postData.recipe,
             imagePath: postData.imagePath,
             creator: postData.creator,
           };
           this.form.setValue({
             title: this.post.title,
-            content: this.post.content,
+            ingredients: this.post.ingredients,
+            recipe: this.post.recipe,
             image: this.post.imagePath,
           });
         });
