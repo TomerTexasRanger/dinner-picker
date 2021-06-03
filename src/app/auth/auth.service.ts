@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { AuthDataModel } from "./auth-data-model";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.prod";
 
 const BACKEND_URL = environment.apiUrl;
 
